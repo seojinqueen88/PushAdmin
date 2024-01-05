@@ -586,7 +586,11 @@ public class Users_controller {
 				        response.flushBuffer();
 				        w.close();
 */
-											
+									
+						
+						response.sendError(-1, "already downloading");
+						
+						/*
 						response.setContentType("text/html; charset=utf-8");
 						response.setHeader("Content-Type","text/html; charset=utf-8");
 						response.setHeader("Set-Cookie", "fileDownload=false; path=/");
@@ -606,7 +610,7 @@ public class Users_controller {
 						  } finally {
 							if(out != null) try { out.close(); } catch(Exception ignore) {}
 						  }
-						
+						*/
 						return null;
 					}
 					

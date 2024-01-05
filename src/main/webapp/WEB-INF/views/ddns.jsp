@@ -171,13 +171,14 @@ $(function()
 		    httpMethod: "POST", 
 		    data: $('#excel_all_form').serialize(), 
 		    successCallback: function (url) { 
-		    	alert("Sucess Download"); 
+		    	alert("다운로드 성공"); 
 		        $preparingFileModal.dialog('close');
 		    },
 		    failCallback: function (responseHtml, url, error) { 
 		     
-		     alert("fail Download"); 
+		     alert("다운로드 실패. 잠시후 다시 시도 해 주세요."); 
 		     $preparingFileModal.dialog('close');
+		     
              $("#error-modal").dialog({ modal: true });
 		    } 
 		});
