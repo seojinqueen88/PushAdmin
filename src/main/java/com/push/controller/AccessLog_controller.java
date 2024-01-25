@@ -24,11 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.intra.util.excel.CExcelDocBuild;
 import com.push.service.ClientAccesLogTBL_service;
+import com.push.util.Encryption;
 
 @Controller
 public class AccessLog_controller {
 	  Logger logger = LoggerFactory.getLogger(AccessLog_controller.class);
-
+	  int tmp_access_log_Type = 0;
 	@Autowired
 	ClientAccesLogTBL_service clientAccessTbl_Service;
 	
@@ -51,18 +52,17 @@ public class AccessLog_controller {
 		int total = 0;
 		int total_list = 0;
 		int totalTest = 0;
-
+		
+		
 		switch(type)
 		{
 		
 		case "accesslog_search":
 		 
 			//String search_word_sql = search_word.trim();
-			accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, search_type ,mac_address,  clientAccessTbl_Service.getSearchTypeStr(search_type));
+			accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, search_type ,mac_address);
 			total = accesslog_list.size();
 			//total = clientAccessTbl_Service.count_ClientAccesLogTbl( search_type  ,mac_address,  clientAccessTbl_Service.getSearchTypeStr(search_type));
-		
-			mv.addObject("search_type", search_type);
 			mv.addObject("access_log_type", search_type);
 			//mv.addObject("search_word", search_word);
 			break;
@@ -76,23 +76,42 @@ public class AccessLog_controller {
 			total = clientAccessTbl_Service.count_ClientAccesLogTbl(Integer.parseInt(access_log_type) , mac_address , null);
 			total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null);
 */     
+			if(tmp_access_log_Type != Integer.parseInt(access_log_type) )
+			{
+				page = 1;
+				
 				if(Integer.parseInt(access_log_type) == 5)
 				{
-					logger.info("222222222222222222222222222222222222222222222");
 					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTBL_all(sort, direction, page, mac_address,  null);
 					total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null);
 					mv.addObject("access_log_type", access_log_type);
-					mv.addObject("search_type", search_type);
 				}
-			
-				else 
+				else
 				{
-					logger.info("1111111111111111111111111111111111111111");
-					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, Integer.parseInt(access_log_type), mac_address,  null);		    			
+					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, Integer.parseInt(access_log_type), mac_address);		
 					total = clientAccessTbl_Service.count_ClientAccesLogTbl(Integer.parseInt(access_log_type), mac_address , null);
-					mv.addObject("access_log_type", access_log_type);
-					mv.addObject("search_type", search_type);
 				}
+				
+				tmp_access_log_Type = Integer.parseInt(access_log_type);
+				mv.addObject("access_log_type", access_log_type);
+			}
+			else
+			{
+				if(Integer.parseInt(access_log_type) == 5)
+				{
+					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTBL_all(sort, direction, page, mac_address,  null);
+					total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null);
+				}
+				else
+				{
+					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, Integer.parseInt(access_log_type), mac_address);		
+					total = clientAccessTbl_Service.count_ClientAccesLogTbl(Integer.parseInt(access_log_type), mac_address , null);
+				}
+				
+				tmp_access_log_Type = Integer.parseInt(access_log_type);
+				mv.addObject("access_log_type", access_log_type);
+			}
+			
 			break;	
 		}
 		
@@ -209,11 +228,14 @@ public class AccessLog_controller {
         switch(type)
         { 
       	case "accesslog_all":
-			while ((accesslog = clientAccessTbl_Service.select_ClientAccesLogTblAll_Excel(sort, direction, page, -1, Integer.parseInt(access_log_type), mac_address,  null)) != null
+      		//while ((accesslog = clientAccessTbl_Service.select_ClientAccesLogTblAll_Excel(sort, direction, page, -1, Integer.parseInt(access_log_type), mac_address,  null)) != null
+			while ((accesslog = clientAccessTbl_Service.select_ClientAccesLogTblAll_Excel(sort, direction, offset, Integer.parseInt(access_log_type), mac_address)) != null
 					&& accesslog.size() > 0)
 			{
 				offset += 100000;
+				logger.info("accesslog_all addRowList");
 				excelBuilder.addRowList(accesslog);
+				logger.info("offset : " + offset);
 			}
 	        logger.info( "accesslog_all" );
 			break;

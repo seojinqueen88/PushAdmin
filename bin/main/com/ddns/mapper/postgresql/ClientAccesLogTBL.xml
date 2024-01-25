@@ -9,11 +9,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	 parameterType="map" 
 	resultType="java.util.LinkedHashMap" fetchSize="2048">
 		select  *  from  (
-			select row_number() over ( order by ${sort} ${direction} nulls last  , req_date desc nulls last) as row_idx , *
-		 	from "CLIENT_ACCESSLOG_TBL" where mac_address = #{mac_address} 		
-			 
-		) as t1 where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
+		select row_number() over ( order by req_date ${direction} , req_date desc nulls last) as row_idx , *
+	 	from "CLIENT_ACCESSLOG_TBL" where mac_address = #{mac_address} ) as t1 where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
 		
+			
+		 	
+		<!-- 
+			select  *  from  (
+			select row_number() over ( order by ${sort} ${direction} nulls last  , req_date desc nulls last) as row_idx , *
+		 	from "CLIENT_ACCESSLOG_TBL" where mac_address = #{mac_address} ) as t1 where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
+		
+		 -->
 		<if test="search_type != null and !search_type.equals('')">
 		where ${search_type} like CONCAT('%',#{search_word},'%')
 		</if>
@@ -50,9 +56,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	<select id="select_ClientAccesLogTBL"
 	 parameterType="map" 
 	resultType="java.util.LinkedHashMap" fetchSize="2048">
+		
+		 
 		select  *  from  (
+			select row_number() over ( order by req_date ${direction} , req_date desc nulls last) as row_idx , *
+		 	from 
+		 	
+		 	<!-- 
+		 	select  *  from  (
 			select row_number() over ( order by ${sort} ${direction} nulls last  , req_date desc nulls last) as row_idx , *
 		 	from 
+		 	 -->
 		 	<choose>
 		 	<when test="client_access_log_req_type != null and client_access_log_req_type == 0">
 			   "app_access"    
@@ -91,20 +105,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 			 
 		) as t1 where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
 		
-		<if test="search_type != null and !search_type.equals('')">
-		where ${search_type} like CONCAT('%',#{search_word},'%')
-		</if>
-		<if test="offset !=null">
-			 offset #{offset}
-		</if>
 	</select>
 	 	  
 	<select id="select_ClientAccesLogTBL_forExcel"
 	 parameterType="map" 
 	 resultType="java.util.LinkedHashMap" fetchSize="2048">
 		select  row_idx, client_access_req_type, mac_address, req_id , api_type, req_date  from  (
-			select row_number() over ( order by ${sort} ${direction} nulls last  , req_date desc nulls last) as row_idx , *
+			select row_number() over ( order by req_date desc nulls last) as row_idx , *
 		 	from "CLIENT_ACCESSLOG_TBL_FOR_EXCEL" where mac_address = '${mac_address}' 
+		 	
+		 	<!-- select  row_idx, client_access_req_type, mac_address, req_id , api_type, req_date  from  (
+			select row_number() over ( order by ${sort} ${direction} nulls last  , req_date desc nulls last) as row_idx , *
+		 	from "CLIENT_ACCESSLOG_TBL_FOR_EXCEL" where mac_address = '${mac_address}'  -->
 	
 			<choose>
 		 	<when test="client_access_log_req_type != null and client_access_log_req_type == 0">
@@ -136,9 +148,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	 parameterType="map" 
 	 resultType="java.util.LinkedHashMap" fetchSize="2048">
 		select  row_idx, client_access_req_type, mac_address, req_id , api_type, req_date  from  (
+			select row_number() over ( order by req_date desc nulls last) as row_idx , *
+		 	from "CLIENT_ACCESSLOG_TBL_FOR_EXCEL" where mac_address = '${mac_address}' 
+					
+					<!-- select  row_idx, client_access_req_type, mac_address, req_id , api_type, req_date  from  (
 			select row_number() over ( order by ${sort} ${direction} nulls last  , req_date desc nulls last) as row_idx , *
 		 	from "CLIENT_ACCESSLOG_TBL_FOR_EXCEL" where mac_address = '${mac_address}' 
-	
+					 -->
 			<choose>
 		 	<when test="client_access_log_req_type != null and client_access_log_req_type == 0">
 				and client_access_req_type = 'APP ACCESS'
@@ -155,9 +171,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 			<otherwise>
 				and count !=0 
 			</otherwise>
-		</choose>
-		
+			</choose>
+			
 		) as t1 
+		
+		 <if test="offset !=null">
+		offset #{offset} limit 100000
+		</if>
 	</select>
 
 	 

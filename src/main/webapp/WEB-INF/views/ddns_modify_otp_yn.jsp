@@ -141,6 +141,7 @@ select::-ms-expand {
 			"id" : id,
 			"empNo" : empNo
 		};
+		console.log(JSON.stringify(JSON_DATA));
 		
 		$.ajax({
 			type : "post",
@@ -165,8 +166,7 @@ select::-ms-expand {
 			},
 			error : function(request, status, error) {
 				alert("오류가 발생되었습니다. 관리자에게 문의해주세요");
-				console.log("code:" + request.status + "\n" + "message:"
-						+ request.responseText + "\n" + "error:" + error);
+				//console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 			}
 		});
 	}

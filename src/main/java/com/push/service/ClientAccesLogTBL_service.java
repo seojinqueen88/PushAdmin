@@ -42,15 +42,14 @@ public class ClientAccesLogTBL_service {
 			return clientAccessTblDao.select_ClientAccesLogTBL_all(map);
 		}
 	
-	public List<Map<String, Object>> select_ClientAccesLogTbl(String sort, String direction ,int page ,Integer client_access_log_req_type , String mac_address,
-		    String search_type) {
+	public List<Map<String, Object>> select_ClientAccesLogTbl(String sort, String direction ,int page ,Integer client_access_log_req_type , String mac_address) {
 			Map<String, Object> map = new HashMap<>();
-			  map.put("client_access_log_req_type",client_access_log_req_type);
-		      map.put("mac_address",mac_address);
-		      map.put("search_type",search_type);
 		      map.put("sort", sort);
 		      map.put("direction", direction);
     		  map.put("page", page);
+    		  map.put("client_access_log_req_type",client_access_log_req_type);
+		      map.put("mac_address",mac_address);
+		      
 			return clientAccessTblDao.select_ClientAccesLogTBL(map);
 		}
 	
@@ -67,18 +66,14 @@ public class ClientAccesLogTBL_service {
 	        return clientAccessTblDao.select_ClientAccesLogTBL_forExcel(map);
 	    }
 		
-	   public List<Map<String, Object>> select_ClientAccesLogTblAll_Excel(String sort, String direction ,int page, int offset, Integer client_access_log_req_type , String mac_address,
-	        String search_type) {
+	   public List<Map<String, Object>> select_ClientAccesLogTblAll_Excel(String sort, String direction, int offset, Integer client_access_log_req_type , String mac_address
+	        ) {
 	        Map<String, Object> map = new HashMap<>();
 	          map.put("client_access_log_req_type",client_access_log_req_type);
 	          map.put("mac_address", mac_address);
-	          map.put("search_type", search_type);
 	          map.put("sort", sort);
 	          map.put("direction", direction);
-	          if(page > 0)
-	        	  map.put("page" , page);
-	          if(offset >= 0)
-	        	  map.put("offset" , offset);
+	          map.put("offset" , offset);
 	        return clientAccessTblDao.select_ClientAccesLogTBLAll_forExcel(map);
 	    }
 	private static final int SEARCHTYPE_MAC = 0;

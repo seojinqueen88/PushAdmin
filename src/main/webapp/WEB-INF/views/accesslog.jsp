@@ -312,8 +312,8 @@ function set_day_option(e, max_len)
 					<tr>
 						<td colspan="6" align="center">
 							<c:if test="${start_page > 10 }">			
-								<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${1 }&access_log_type=${access_log_type }&mac_address=${mac_address}">[맨앞]</a>
-								<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${start_page - 10 }&access_log_type=${access_log_type }&mac_address=${mac_address }">[이전]</a>					
+								<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${1 }&access_log_type=${access_log_type}&mac_address=${mac_address}">[맨앞]</a>
+								<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${start_page - 10 }&access_log_type=${access_log_type}&mac_address=${mac_address}">[이전]</a>					
 							</c:if>
 							<c:forEach var="a" begin="${start_page }" end="${end_page <= last_page ? end_page : last_page }">
 								<c:choose>
@@ -321,14 +321,14 @@ function set_day_option(e, max_len)
 										<a>[${a }]</a>
 									</c:when>
 									<c:otherwise>
-										<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${a }&access_log_type=${access_log_type }&mac_address=${mac_address }">[${a }]</a>
+										<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${a}&access_log_type=${access_log_type}&mac_address=${mac_address}">[${a }]</a>
 										
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 							<c:if test="${end_page < last_page }">
-								<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${start_page + 10 }&access_log_type=${access_log_type }&mac_address=${mac_address }">[다음]</a>
-								<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${last_page }&access_log_type=${access_log_type }&mac_address=${mac_address }">[맨뒤]</a>
+								<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${start_page + 10 }&access_log_type=${access_log_type}&mac_address=${mac_address}">[다음]</a>
+								<a href="/PushAdmin/accesslog_page.do?type=${type }&sort=${sort }&direction=${direction }&page=${last_page }&access_log_type=${access_log_type}&mac_address=${mac_address}">[맨뒤]</a>
 							</c:if>
 						</td>
 					</tr>

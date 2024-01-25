@@ -242,7 +242,6 @@ public class Users_controller {
 				//   System.out.println(ddns_list.get(0).get("count").getClass().getName());
 				 //if(ddns_list != null)
 				 //    total =  Integer.parseInt(String.valueOf(ddns_list.get(0).get("count")));
-				//logger.info("page : "+ page);
 				
 				break;
 		}
@@ -728,6 +727,7 @@ public class Users_controller {
 * @param jumin
 * @return
  */
+	
 	@RequestMapping(value = {"/modify_otp_yn.do"})
 	@ResponseBody
 	public ModelAndView modify_opt_yn(HttpServletRequest request,
@@ -735,12 +735,22 @@ public class Users_controller {
 	    @RequestParam(required = true, defaultValue = "", value = "otp_yn") String otp_yn,
 		@RequestParam(required = true, defaultValue = "", value = "id") String id,
 		@RequestParam(required = false, defaultValue = "", value = "before_otp_yn") String before_otp_yn) {
+		
+
 		ModelAndView mv = new ModelAndView();
 
 		mv.setViewName("ddns_modify_otp_yn");
+		
 		mv.addObject("otp_yn", otp_yn);
 		mv.addObject("mac", jumin);
 		mv.addObject("before_otp_yn",before_otp_yn);
+		
+
+		logger.info(" mac : " + jumin);
+		logger.info(" otp_yn :" + otp_yn);
+		logger.info(" id : " + id);
+		logger.info(" before_otp_yn : " + before_otp_yn);
+		
 		return mv;
 	}
 	/**
@@ -798,20 +808,28 @@ public class Users_controller {
 			return "parameter_err";
 		String jumin = (String) map.get("mac");
         String id = (String) map.get("id");
-		Integer otp_yn = (Integer) map.get("opt_yn");
+        Integer otp_yn = Integer.parseInt(String.valueOf(map.get("opt_yn")));
+		//Integer otp_yn = (Integer) map.get("opt_yn");
 		//String empNo = (String) map.get("empNo");
 		//System.out.println("OPTY %d\n" + opt_yn );
 		//System.out.println("jumin %d\n" + jumin );
-	 
+		logger.debug("!!!!!!!!!!!" + id+ ":" + jumin+ ":" + otp_yn);
+		
 		if(map.containsKey("before_otp_yn"))
 		{
+			logger.debug("***********" + id+ ":" + jumin+ ":" + otp_yn);
 		  otp_change_log.info(" OTP_ADMIN_ID: {}mac: {}, OTP_YN: {}->{}",id,jumin,map.get("before_otp_yn"),otp_yn);
-		}else
+		}
+		else
 		{//TRACE  <  DEBUG  <  INFO  <  WARN  <  ERROR
+			logger.debug("??????????" + id+ ":" + jumin+ ":" + otp_yn);
 		  otp_change_log.error(" OTP_ADMIN_ID: {} mac: {},OTP_YN: {}" ,id,jumin ,otp_yn);
 		}
+		logger.debug("###################");
+		
 		if(users_service.update_users_service_no_otp_yn(id,jumin, otp_yn) == true)
 		{
+			
 			return "success";
 		}
 		else  
