@@ -470,12 +470,6 @@ function checkList(){
 					<td width="9%" class="select title font1"><span style="cursor: pointer;"
 							 onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=empty1&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">IP 갱신 (IP 할당)</span>
 					 </td>
-					 <td width="8%" class="select title font1"><span style="cursor: pointer;"
-							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=app_access_id&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">APP ACCESS</span>
-					  </td>
-					<td width="9%" class="select title font1"><span style="cursor: pointer;"
-							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=cms_access_id&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">CMS ACCESS</span>
-					  </td>
 					</tr>
 						<tr align="center">
 
@@ -518,12 +512,6 @@ function checkList(){
 					</td>
 					<td class="select title font1">
 						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=otp_yn&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">OTP 인증</span>
-					</td>
-					<td class="select title font1">
-						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=device_accesslog_type_t0&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">장비 ACCESS</span>
-					</td>
-					<td class="select title font1">
-						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=device_accesslog_type_t1&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">웹뷰어 ACCESS</span>
 					</td>
 
 					</tr>
@@ -609,32 +597,6 @@ function checkList(){
 							<c:remove var="ip_status" />
 							<c:remove var="log_status_date" />
 							
-							<c:choose>
-						<c:when test="${not empty ddns_list.app_access_id && ddns_list.app_access_id != ''}">
-						 	<td title="${ddns_list.app_date}"> 
-						 	
-						 	<a target ="_blank" href="/PushAdmin/accesslog_page.do?type=accesslog&sort=req_id&direction=desc&page=1&access_log_type=0&mac_address=${ddns_list.jumin}">
-						 	 ${ddns_list.app_access_id } </a> </td>
-						
-						 <!--	<fmt:formatDate  var="app_date" value="${ddns_list.app_date}" type="DATE" pattern="yyyy-MM-dd HH:mm:ss"/>
-							<td style=" white-space: nowrap;">${app_date } 	</td> -->
-							</c:when>
-							   <c:otherwise>
-							 <td></td> 
-							 </c:otherwise>
-							 </c:choose>
-						<c:choose>
-							 <c:when test="${not empty ddns_list.cms_access_id && ddns_list.cms_access_id != ''}">
-						 	<td title="${ddns_list.cms_date}"> 
-						 	<a target ="_blank" href="/PushAdmin/accesslog_page.do?type=accesslog&sort=req_id&direction=desc&page=1&access_log_type=1&mac_address=${ddns_list.jumin}">
-							${ddns_list.cms_access_id } </a> </td>
-						  
-							 </c:when>
-							 <c:otherwise>
-							 <td></td> 
-							 </c:otherwise>
-						</c:choose>
-
 						<tr align="center" height="30">
 							<td>
 								<!-- 20220121 장비 삭제/서비스 상태 변경 기능 계정 권한 확인 추가 -->
@@ -791,30 +753,7 @@ function checkList(){
 							 </c:otherwise>
 						</c:choose> -->
 						
-							<c:choose>
-							 <c:when test="${not empty ddns_list.device_accesslog_type_t0 && ddns_list.device_accesslog_type_t0 != ''}">
-						 	<td title="${ddns_list.device_protocol_date_t0}">
-						 	<a target ="_blank" href="/PushAdmin/accesslog_page.do?type=accesslog&sort=req_id&direction=desc&page=1&access_log_type=2&mac_address=${ddns_list.jumin}">
-							 ${ddns_list.device_accesslog_type_t0 } </a> </td>
-						  
-							 </c:when>
-							 <c:otherwise>
-							 <td></td> 
-							 </c:otherwise>
-						</c:choose>
 						
-							<c:choose>
-							 <c:when test="${not empty ddns_list.device_accesslog_type_t1 && ddns_list.device_accesslog_type_t1 != ''}">
-						 	<td title="${ddns_list.device_protocol_date_t1}">
-						 	<a target ="_blank" href="/PushAdmin/accesslog_page.do?type=accesslog&sort=req_id&direction=desc&page=1&access_log_type=3&mac_address=${ddns_list.jumin}">
-							 ${ddns_list.device_accesslog_type_t1 } </a> </td>
-						  
-							 </c:when>
-							 <c:otherwise>
-							 <td></td> 
-							 </c:otherwise>
-						</c:choose>
-
 						<tr height="0.1">
 							<td colspan="14">
 								<hr size="0.1" color="CDCBCB" style="border-bottom: medium;">
@@ -850,7 +789,7 @@ function checkList(){
 						<td></td>
 					</tr>
 					<tr height="30">
-						<td colspan="6"></td>
+						<td colspan="5"></td>
 						<td colspan="4">
 							<form id="search_form" name="search_form" action="/PushAdmin/${url }">
 								<select name="search_type" id="search_type">
@@ -866,10 +805,6 @@ function checkList(){
 									<c:if test="${url.equals('ddns_page.do') }">
 										<option value=9 <c:if test="${search_type == 9}">selected</c:if>>서비스 번호</option>
 										<option value=10 <c:if test="${search_type == 10}">selected</c:if>>OTP 인증</option>
-										<option value=11 <c:if test="${search_type == 11}">selected</c:if>>APP ACCESS ID</option>
-										<option value=12 <c:if test="${search_type == 12}">selected</c:if>>CMS ACCESS ID</option>
-										<option value=11 <c:if test="${search_type == 13}">selected</c:if>>DEVICE/녹화기</option>
-										<option value=12 <c:if test="${search_type == 14}">selected</c:if>>DEVICE/웹뷰어</option>
 
 									</c:if>
 								</select>

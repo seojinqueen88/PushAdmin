@@ -122,13 +122,14 @@ public class Users_controller {
 		long total = 0;
 		String search_word_sql = "";
 		 try {
-		switch (type) {
+		switch (type) 
+		{
 			case "ddns_serviceno_search" :
-			  
 			  switch(search_type)
 			  {
 			    case Users_service.SEARCHTYPE_REGISTERTYPE:
 			    case Users_service.SEARCHTYPE_OTP_YN:
+			    	logger.debug("11111111111111ddns_serviceno_search "+Users_service.SEARCHTYPE_REGISTERTYPE + "," +  Users_service.SEARCHTYPE_OTP_YN + "," + search_word);
 			    //case Users_service.SEARCHTYPE_APP_ACCESS_TYPE:
 			      ddns_list = users_service.select_users_where_serviceno_and_registertype(service_no, search_type,Integer.parseInt(search_word), sort, direction, page);
 			    break;
@@ -144,6 +145,7 @@ public class Users_controller {
 			      
 			    default:
 			    	search_word_sql = search_word;
+			    	logger.debug("22222222222222222ddns_serviceno_search :" + search_word);
                     ddns_list = users_service.select_users_where_serviceno_and_search_type(service_no, search_type, search_word_sql,sort, direction, page);
                     break;
                     }
@@ -167,6 +169,7 @@ public class Users_controller {
 				break;
 
 			case "ddns_serviceno" :
+				logger.debug("ddns_serviceno");
 				ddns_list = users_service.select_users_where_serviceno(service_no, sort, direction, page);
 				//total = users_service.count_users_where_serviceno(service_no);
 				break;
@@ -176,8 +179,11 @@ public class Users_controller {
 			  {
 			    case Users_service.SEARCHTYPE_REGISTERTYPE:
 			    case Users_service.SEARCHTYPE_OTP_YN:
+			    	
 	//		    case Users_service.SEARCHTYPE_APP_ACCESS_ID:
    //             case Users_service.SEARCHTYPE_CMS_ACCESS_ID: 
+
+				  logger.debug("333333333333dddns_search "+ Users_service.SEARCHTYPE_REGISTERTYPE + "," +  Users_service.SEARCHTYPE_OTP_YN + "," + search_word);
                   ddns_list = users_service.select_users_where_registertype(search_type, Integer.parseInt(search_word), sort,direction, page);
                   break;
                 
@@ -195,6 +201,7 @@ public class Users_controller {
                   */
                   default:
                     search_word_sql = search_word;
+                    logger.debug("4444444444444dddns_search :" + search_word);
                     ddns_list = users_service.select_users_where_search_type(search_type, search_word_sql, sort, direction, page); 
                 }
 			   //  total =  Integer.parseInt(String.valueOf(ddns_list.get(0).get("count")));
@@ -218,13 +225,14 @@ public class Users_controller {
 			
 			case "ddns_search_otp_yn" :
 				if (search_type == Users_service.SEARCHTYPE_OTP_YN) {
-					 
+					logger.debug("55555555555555ddns_search_otp_yn "+ Users_service.SEARCHTYPE_OTP_YN + "," + Integer.parseInt(search_word));
 						ddns_list = users_service.select_users_where_registertype(search_type, Integer.parseInt(search_word), sort, direction, page);
 					//	total = users_service.count_users_where_registertype(
 					//			search_type, Integer.parseInt(search_word));
 					 
 				} else {
 					search_word_sql = search_word;
+					logger.debug("666666666666666ddns_search_otp_yn "+ search_word_sql);
 					ddns_list = users_service.select_users_where_search_type(search_type, search_word_sql, sort, direction, page);
 				//	total = users_service.count_users_where_search_type(
 				//			search_type, search_word_sql);
@@ -783,6 +791,43 @@ public class Users_controller {
         return mv;
     }
 	
+	/**
+	 * 
+	* @Method Name : modify_web_policy
+	* @작성일 : 2024. 1. 28. 
+	* @작성자 : sjlee
+	* @변경이력 : 
+	* @Method 설명 :2023 영상 시스템 고도화 개발 시방서의 취약한 PW 사용여부와 웹접속 white list 기반 동작 기능 개발 
+	* @param request
+	* @param jumin
+	* @param web_policy
+	* @param id
+	* @param before_web_policy
+	* @return
+	 */
+	@RequestMapping(value = {"/modify_web_policy.do"} , produces = MediaType.APPLICATION_JSON_VALUE )
+    @ResponseBody
+    public ModelAndView modify_web_policy(HttpServletRequest request,
+        @RequestParam(required = true, defaultValue = "", value = "mac") String jumin,
+        @RequestParam(required = true, defaultValue = "", value = "web_policy") String web_policy,
+        @RequestParam(required = true, defaultValue = "", value = "id") String id,
+        @RequestParam(required = false, defaultValue = "", value = "before_web_policy") String before_web_policy) {
+        ModelAndView mv = new ModelAndView();
+
+        logger.debug( "ddns_modify_web_policy");
+
+        logger.debug( "web_policy :" + web_policy);
+        logger.debug( "jumin" + jumin);
+        logger.debug( "before_web_policy :" + before_web_policy);
+        
+        mv.setViewName("ddns_modify_web_policy");
+        mv.addObject("web_policy", web_policy);
+        mv.addObject("mac", jumin);
+        mv.addObject("before_web_policy",before_web_policy);
+        return mv;
+    }
+	
+	
 	@RequestMapping(value = "ddns_service_no_modify.do")
 	@ResponseBody
 	public String ddns_service_no_modify(
@@ -866,6 +911,7 @@ public class Users_controller {
  
         if(map.containsKey("before_access_rule"))
         {
+        	logger.debug("***********" + id+ ":" + jumin+ ":" + access_rule);
           otp_change_log.info(" 통합 앱 - ADMIN_ID: {}mac: {}, access_rule: {}->{}",id,jumin,map.get("before_access_rule"),access_rule);
         }else
         {//TRACE  <  DEBUG  <  INFO  <  WARN  <  ERROR
@@ -882,7 +928,49 @@ public class Users_controller {
           
     }
 	
-	
+    /**
+     * 
+    * @Method Name : ddns_service_web_policy_modi_modify
+    * @작성일 : 2024. 1. 29. 
+    * @작성자 : sjlee
+    * @변경이력 :
+    * @Method 설명 :
+    * @param url
+    * @param map
+    * @return
+     */
+        @RequestMapping(value = "ddns_service_web_policy_modi_modify.do" /*, produces = MediaType.APPLICATION_JSON_VALUE*/)
+        @ResponseBody
+        public String ddns_service_web_policy_modi_modify(
+                @RequestParam(defaultValue = "ddns_page.do", value = "url") String url,
+                @RequestBody Map<String, Object> map) {
+            
+            if(map.containsKey("web_policy") == false || map.containsKey("id") ==false)
+                return "parameter_err";
+            String jumin = (String) map.get("mac");
+            String id = (String) map.get("id");
+            Integer web_policy = (Integer) map.get("web_policy");
+     
+            logger.debug("!!!!!!!!!!!" + id+ ":" + jumin+ ":" + web_policy);
+            
+            if(map.containsKey("before_web_policy"))
+            {
+              otp_change_log.info(" 통합 웹 - ADMIN_ID: {}mac: {}, web_policy: {}->{}",id,jumin,map.get("before_web_policy"),web_policy);
+            }else
+            {//TRACE  <  DEBUG  <  INFO  <  WARN  <  ERROR
+              otp_change_log.error(" 통합 웹 - ADMIN_ID: {} mac: {},web_policy: {}" ,id,jumin ,web_policy);
+            }
+            if(users_service.update_users_service_no_web_policy(id,jumin, web_policy) == true)
+            {
+                return "success";
+            }
+            else  
+            {
+                return "failed";
+            }
+              
+        }
+        
 	// ddns 상태 정보 변경 페이지
 	@RequestMapping("check_ddns_service_page.do")
 	public ModelAndView check_modify_page(HttpServletRequest request,

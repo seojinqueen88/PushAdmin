@@ -275,6 +275,15 @@ public class Users_service
         //map.put("ADMIN_ID", id);
         return users_dao.update_users_service_access_rule(map) > 0 ? true : false;
     }
+	
+	public boolean update_users_service_no_web_policy(String id , String mac , Integer web_policy)
+    {
+        Map<String, Object> map = new HashMap<>();
+        map.put("mac", mac);
+        map.put("web_policy", web_policy);
+        //map.put("ADMIN_ID", id);
+        return users_dao.update_users_service_web_policy(map) > 0 ? true : false;
+    }
 	public Map<String, Object> select_users_p2p_where_mac(String mac)
 	{
 		return users_dao.select_users_p2p_where_mac(mac);

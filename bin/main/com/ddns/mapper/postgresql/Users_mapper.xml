@@ -820,10 +820,24 @@ select *
 			update users set access_rule = #{access_rule} where jumin = #{mac}
 			</otherwise>
 		</choose>
-		
 	</update>
+	
+		<!-- 20240129 / web_policy  수정 기능 추가 -->
+    <update id="update_users_service_web_policy" parameterType="map">
+    <choose>
+			<when test="ADMIN_ID!=null and !ADMIN_ID.equals('')">
+			update users set web_policy = #{web_policy} ,OTP_ADMIN_ID=#{ADMIN_ID} where jumin = #{mac}
+			</when>
+			<otherwise>
+			update users set web_policy = #{web_policy} where jumin = #{mac}
+			</otherwise>
+		</choose>
+	</update>
+	
 	 <select id="select_user_registerType_where_otp_yn" parameterType="map" resultType="int">
 		select otp_yn from users where jumin = #{mac}
 	</select>
 	
+
+
 </mapper>

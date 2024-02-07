@@ -508,7 +508,7 @@ function checkList(){
 					<!-- END -->
 					</td>
 					<td class="select title font1">
-						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=jumin&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">맥 주소/앱 로그인 정책/웹 로그인 정책</span>
+						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=jumin&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">맥 주소/로그인 정책</span>
 					</td>
 					<td class="select title font1">
 						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=eqcat&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">장비</span>
@@ -665,29 +665,7 @@ function checkList(){
 								<!-- END -->
 							</td>
 							<td font-size="93%">${ddns_list.jumin } 
-							 
-								<c:choose>
-								<c:when test="${login_member.member_auth == 2 }">
-								/ <a href="javascript:void(0)"  onclick="modify_access_rule('${login_member.member_id}', '${ddns_list.jumin}', '${ddns_list.access_rule}')">
 
-								<c:choose>
-									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
-									<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
-									<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
-									<c:otherwise>${ddns_list.access_rule}</c:otherwise>
-								</c:choose>
-								</a>
-								</c:when>
-								<c:otherwise>
-								<c:choose>
-									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
-									<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
-									<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
-									<c:otherwise>${ddns_list.access_rule}</c:otherwise>
-								
-								</c:choose>
-								</c:otherwise>
-							</c:choose>
 							<!-- 	
 							<c:choose>
 								<c:when test="${login_member.member_auth == 2 }">
@@ -860,6 +838,59 @@ function checkList(){
 							 </c:otherwise>
 						</c:choose>
 
+						<tr align="center" height="30">
+							<td>
+								<!-- 20220121 장비 삭제/서비스 상태 변경 기능 계정 권한 확인 추가 -->
+								
+							</td>
+							<td font-size="93%"> 
+							 
+								<c:choose>
+								<c:when test="${login_member.member_auth == 2 }">
+								/ <a href="javascript:void(0)"  onclick="modify_access_rule('${login_member.member_id}', '${ddns_list.jumin}', '${ddns_list.access_rule}')">
+
+								<c:choose>
+									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
+									<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
+									<c:otherwise>${ddns_list.access_rule}</c:otherwise>
+								</c:choose>
+								</a>
+								</c:when>
+								<c:otherwise>
+								<c:choose>
+									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
+									<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
+									<c:otherwise>${ddns_list.access_rule}</c:otherwise>
+								
+								</c:choose>
+								</c:otherwise>
+							</c:choose>
+							
+							<c:choose>
+								<c:when test="${login_member.member_auth == 2 }">
+								/ <a href="javascript:void(0)"  onclick="modify_web_policy('${login_member.member_id}', '${ddns_list.jumin}', '${ddns_list.web_policy}')">
+
+								<c:choose>
+									<c:when test="${ddns_list.web_policy ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.web_policy ==1 }">내부망+서버 white list IP만 허용</c:when>
+									<c:when test="${ddns_list.web_policy ==2}">내부망+서버 white list IP + 고객 개별설정한 IP</c:when>
+									<c:otherwise>${ddns_list.web_policy}</c:otherwise>
+								</c:choose>
+								</a>
+								</c:when>
+								<c:otherwise>
+								<c:choose>
+									<c:when test="${ddns_list.web_policy ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.web_policy ==1 }">내부망+서버 white list IP만 허용</c:when>
+									<c:when test="${ddns_list.web_policy ==2}">내부망+서버 white list IP + 고객 개별설정한 IP</c:when>
+									<c:otherwise>${ddns_list.web_policy}</c:otherwise>
+								
+								</c:choose>
+								</c:otherwise>
+							</c:choose>
+							
 						<tr height="0.1">
 							<td colspan="14">
 								<hr size="0.1" color="CDCBCB" style="border-bottom: medium;">

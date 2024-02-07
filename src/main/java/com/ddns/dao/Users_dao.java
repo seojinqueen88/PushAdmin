@@ -67,4 +67,7 @@ public interface Users_dao
 	public int select_user_registerType_where_otp_yn(String mac);
 	public int update_users_service_no_otp_yn(Map<String,Object>map);
 	public int update_users_service_access_rule(Map<String,Object>map);
+	public int update_users_service_web_policy(Map<String,Object>map);
+
+	
 }

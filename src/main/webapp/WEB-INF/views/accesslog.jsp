@@ -198,7 +198,7 @@ function set_day_option(e, max_len)
 						</td>
 
 						<td width="15%" class="select font1">
-						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/accesslog_page.do?type=${type}&sort=req_date&access_log_type=${access_log_type }&direction=${direction.equals('desc') ? 'asc' : 'desc' }&mac_address=${mac_address }'">TYPE</span>						
+						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/accesslog_page.do?type=${type}&sort=access_log_type&access_log_type=${access_log_type }&direction=${direction.equals('desc') ? 'asc' : 'desc' }&mac_address=${mac_address }'">TYPE</span>						
 						</td>
 						<td width="20%" class="font1">
 							<span>
@@ -209,7 +209,7 @@ function set_day_option(e, max_len)
 									<c:when test="${(access_log_type).equals('3')}">DEVICE ACCESS TPYE - 웹뷰어</c:when>							
 									<c:otherwise> 
 									ID/TYPE
-									           </c:otherwise>
+									</c:otherwise>
 								</c:choose>
 							</span>
 						</td>
