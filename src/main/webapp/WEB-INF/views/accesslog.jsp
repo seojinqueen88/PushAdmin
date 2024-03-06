@@ -196,9 +196,12 @@ function set_day_option(e, max_len)
 						<td width="25%" class="font1">
 							<span>MAC ADDRESS</span>
 						</td>
-
-						<td width="15%" class="select font1">
+						<td width="15%" class="font1">
+						<!-- <td width="15%" class="select font1"> -->
+						<span>TYPE</span>
+						<!-- 
 						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/accesslog_page.do?type=${type}&sort=access_log_type&access_log_type=${access_log_type }&direction=${direction.equals('desc') ? 'asc' : 'desc' }&mac_address=${mac_address }'">TYPE</span>						
+						 -->
 						</td>
 						<td width="20%" class="font1">
 							<span>
