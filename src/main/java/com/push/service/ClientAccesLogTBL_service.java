@@ -17,10 +17,11 @@ public class ClientAccesLogTBL_service {
 	@Autowired
 	private ClientAccesLogTBLDao clientAccessTblDao;
 			
-	public int count_ClientAccesLogTBL_all(String mac_address, String search_type ) {
+	public int count_ClientAccesLogTBL_all(String mac_address, String search_type, String search_word) {
 		  Map<String, Object> map = new HashMap<>();
 		  map.put("mac_address",mac_address);
 	      map.put("search_type",search_type);
+	      map.put("search_word",search_word);
 		  return clientAccessTblDao.count_ClientAccesLogTBL_all(map);
 		}
 	
@@ -32,24 +33,37 @@ public class ClientAccesLogTBL_service {
 	  return clientAccessTblDao.count_ClientAccesLogTBL(map);
 	}
 	
-	public List<Map<String, Object>> select_ClientAccesLogTBL_all(String sort, String direction ,int page ,String mac_address, String search_type) {
+	public int count_ClientAccesLogTBL_all_1(String sort, String direction ,int page ,String mac_address, String search_type, String search_word ) {
+		Map<String, Object> map = new HashMap<>();
+	      map.put("mac_address",mac_address);
+	      map.put("search_type",search_type);
+	      map.put("sort", sort);
+	      map.put("direction", direction);
+		  map.put("page", page);
+		  map.put("search_word",search_word);
+		return clientAccessTblDao.count_ClientAccesLogTBL_all_1(map);
+	}
+	
+	
+	public List<Map<String, Object>> select_ClientAccesLogTBL_all(String sort, String direction ,int page ,String mac_address, String search_type, String search_word ) {
 			Map<String, Object> map = new HashMap<>();
 		      map.put("mac_address",mac_address);
 		      map.put("search_type",search_type);
 		      map.put("sort", sort);
 		      map.put("direction", direction);
     		  map.put("page", page);
+    		  map.put("search_word",search_word);
 			return clientAccessTblDao.select_ClientAccesLogTBL_all(map);
 		}
 	
-	public List<Map<String, Object>> select_ClientAccesLogTbl(String sort, String direction ,int page ,Integer client_access_log_req_type , String mac_address) {
+	public List<Map<String, Object>> select_ClientAccesLogTbl(String sort, String direction ,int page ,Integer client_access_log_req_type , String mac_address , String search_word ) {
 			Map<String, Object> map = new HashMap<>();
 		      map.put("sort", sort);
 		      map.put("direction", direction);
     		  map.put("page", page);
     		  map.put("client_access_log_req_type",client_access_log_req_type);
 		      map.put("mac_address",mac_address);
-		      
+		      map.put("search_word",search_word);
 			return clientAccessTblDao.select_ClientAccesLogTBL(map);
 		}
 	

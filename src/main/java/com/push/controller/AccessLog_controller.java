@@ -41,8 +41,8 @@ public class AccessLog_controller {
 			@RequestParam(defaultValue = "desc", value = "direction") String direction,
 			@RequestParam(required = false, defaultValue = "0", value = "access_log_type") String access_log_type,
 			@RequestParam(required = false, defaultValue = "", value = "mac_address") String mac_address,
-			@RequestParam(required = false, defaultValue = "0", value = "search_type") Integer search_type
-			//@RequestParam(required = false, defaultValue = "", value = "search_word") String search_word,
+			@RequestParam(required = false, defaultValue = "0", value = "search_type") Integer search_type,
+			@RequestParam(required = false, defaultValue = "", value = "search_word") String search_word
 			//@RequestParam(required = false, defaultValue ="0" ,value = "search_time_type") String search_time_type
 		)	
 	{
@@ -58,9 +58,10 @@ public class AccessLog_controller {
 		{
 		
 		case "accesslog_search":
-		 
+			logger.debug("00000000000000000");
+			
 			//String search_word_sql = search_word.trim();
-			accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, search_type ,mac_address);
+			accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, search_type ,mac_address, search_word);
 			total = accesslog_list.size();
 			//total = clientAccessTbl_Service.count_ClientAccesLogTbl( search_type  ,mac_address,  clientAccessTbl_Service.getSearchTypeStr(search_type));
 			mv.addObject("access_log_type", search_type);
@@ -82,14 +83,20 @@ public class AccessLog_controller {
 				
 				if(Integer.parseInt(access_log_type) == 5)
 				{
-					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTBL_all(sort, direction, page, mac_address,  null);
-					total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null);
+					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTBL_all(sort, direction, page, mac_address,  null, search_word);
+					//logger.debug("accesslog_list : "+ accesslog_list);
+					//total = accesslog_list.size();
+					total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null, search_word);
 					mv.addObject("access_log_type", access_log_type);
+					logger.debug("111111111111111111111");
 				}
 				else
 				{
-					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, Integer.parseInt(access_log_type), mac_address);		
-					total = clientAccessTbl_Service.count_ClientAccesLogTbl(Integer.parseInt(access_log_type), mac_address , null);
+					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, Integer.parseInt(access_log_type), mac_address, search_word);		
+					total = accesslog_list.size();
+					
+					//total = clientAccessTbl_Service.count_ClientAccesLogTbl(Integer.parseInt(access_log_type), mac_address , null);
+					logger.debug("2222222222222");
 				}
 				
 				tmp_access_log_Type = Integer.parseInt(access_log_type);
@@ -99,12 +106,26 @@ public class AccessLog_controller {
 			{
 				if(Integer.parseInt(access_log_type) == 5)
 				{
-					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTBL_all(sort, direction, page, mac_address,  null);
-					total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null);
+					
+					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTBL_all(sort, direction, page, mac_address,  null, search_word);
+					//logger.debug("accesslog_list : "+ accesslog_list);
+					//total = accesslog_list.size();
+					total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null, search_word);
+					/*
+					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTBL_all(sort, direction, page, mac_address,  null, search_word);
+					//total = accesslog_list.size();
+					//total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null);
+					total = clientAccessTbl_Service.count_ClientAccesLogTBL_all_1(sort, direction, page, mac_address,  null, search_word);
+					//total = clientAccessTbl_Service.count_ClientAccesLogTBL_all(mac_address , null, search_word);
+					 
+					 */
+					logger.debug("3333333333333");
 				}
 				else
 				{
-					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, Integer.parseInt(access_log_type), mac_address);		
+					accesslog_list = clientAccessTbl_Service.select_ClientAccesLogTbl(sort, direction, page, Integer.parseInt(access_log_type), mac_address, search_word);		
+					//total = accesslog_list.size();
+					logger.debug("444444444444444");
 					total = clientAccessTbl_Service.count_ClientAccesLogTbl(Integer.parseInt(access_log_type), mac_address , null);
 				}
 				
@@ -151,7 +172,7 @@ public class AccessLog_controller {
 		mv.addObject("end_page", (page - 1) / 10 * 10 + 10);
 		mv.addObject("last_page", last_page);
 		mv.addObject("mac_address", mac_address);
-
+		//mv.addObject("search_word", search_word);
 		//mv.addObject("search_time_type", search_time_type);
 		return mv;
 	

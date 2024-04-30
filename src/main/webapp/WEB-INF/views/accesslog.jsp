@@ -227,7 +227,11 @@ function set_day_option(e, max_len)
 						</td>
 	
 						<td width="20%" class="select font1">																																	 
+							<span style="cursor: pointer;" onclick="location.href='/PushAdmin/accesslog_page.do?type=${type}&sort=req_date&access_log_type=${access_log_type }&direction=${direction.equals('desc') ? 'asc' : 'desc' }&mac_address=${mac_address }&search_word=${search_word }'">DATE</span>
+							<!--
 							<span style="cursor: pointer;" onclick="location.href='/PushAdmin/accesslog_page.do?type=${type}&sort=req_date&access_log_type=${access_log_type }&direction=${direction.equals('desc') ? 'asc' : 'desc' }&mac_address=${mac_address }'">DATE</span>
+						-->
+
 						</td>
  
 					</tr>
@@ -356,6 +360,10 @@ function set_day_option(e, max_len)
 								</select>
 
 								<input type="hidden" name="mac_address" id="mac_address" value="${mac_address}" >
+
+								<input id="search_word" name="search_word" style="vertical-align: 5%; width: 140px" value="${search_word }" maxlength="40"> <input id="search_btn" type="button" style="background: #000000; color: white;" value="검색">
+								
+
 							</form>
 						</td>
 						<td colspan="3" align="right">

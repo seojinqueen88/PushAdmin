@@ -12,6 +12,7 @@ public interface ClientAccesLogTBLDao {
 	
     public int count_ClientAccesLogTBL(Map<String, Object> map);
     public int count_ClientAccesLogTBL_all(Map<String, Object> map);
+    public int count_ClientAccesLogTBL_all_1(Map<String, Object> map);
     public List<Map<String, Object>> select_ClientAccesLogTBL_all(Map<String, Object> map);
     public List<Map<String, Object>> select_ClientAccesLogTBL(Map<String, Object> map);
     public List<Map<String, Object>> select_ClientAccesLogTBL_forExcel(Map<String, Object> map);

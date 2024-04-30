@@ -448,19 +448,24 @@ function checkList(){
 			<td>
 				<table border="0" width="100%" style="border-collapse: collapse;">
 					<tr>
-						<td style="background-color: #F6F6F6; border: 0px; top: 5px;" height="30px" colspan="14" align="center" class="font2">D D N S</td>
+						<td style="background-color: #F6F6F6; border: 0px; top: 5px;" height="30px" colspan="15" align="center" class="font2">D D N S</td>
 					</tr>
 		
 				<tr height="0.1">
-					<td colspan="14">
+					<td colspan="15">
 						<hr size="0.1" color="CDCBCB" style="border-bottom: medium;">
 					</td>
 				</tr>
 				<tr align="center">
 					<td width="4%" class="title font1"><span>No.</span></td>
-					<td width="10%" class="select title font1"><span style="cursor: pointer;"
+					<td width="7%" class="select title font1"><span style="cursor: pointer;"
 							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=domain&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">도메인</span>
 					</td>
+					
+					<td width="8%" class="select title font1"><span style="cursor: pointer;"
+						    onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=access_rule&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">앱 로그인 정책</span>
+					</td>
+
 					<td width="5%" class="select title font1"><span style="cursor: pointer;"
 							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=maker&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">제조사</span>
 					</td>
@@ -476,10 +481,10 @@ function checkList(){
 					<td width="8%" class="select title font1"><span style="cursor: pointer;"
 							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=p2p_uid&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">P2P 라이선스 </span>
 					</td>
-					<td width="9%" class="select title font1"><span style="cursor: pointer;"
+					<td width="8%" class="select title font1"><span style="cursor: pointer;"
 							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=p2p_priority&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">P2P 우선순위 </span>
 					</td>
-					<td width="8%" class="select title font1"><span style="cursor: pointer;"
+					<td width="7%" class="select title font1"><span style="cursor: pointer;"
 							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=p2p_device&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">장비 P2P 보유 여부</span>
 					</td>
 					<td width="5%" class="select title font1"><span style="cursor: pointer;"
@@ -492,10 +497,10 @@ function checkList(){
 							 onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=empty1&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">IP 갱신 (IP 할당)</span>
 					 </td>
 					 <td width="8%" class="select title font1"><span style="cursor: pointer;"
-							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=app_access_id&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">APP ACCESS</span>
+							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=app_access_id&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">APP 접속 이력</span>
 					  </td>
 					<td width="9%" class="select title font1"><span style="cursor: pointer;"
-							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=cms_access_id&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">CMS ACCESS</span>
+							onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=cms_access_id&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">CMS 접속 이력</span>
 					  </td>
 					</tr>
 						<tr align="center">
@@ -508,8 +513,13 @@ function checkList(){
 					<!-- END -->
 					</td>
 					<td class="select title font1">
-						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=jumin&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">맥 주소/앱 로그인 정책/웹 로그인 정책</span>
+						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=jumin&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">맥 주소 / 취약 패스워드</span>
 					</td>
+
+					<td class="select title font1">
+						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=web_policy&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">웹 로그인 정책</span>
+					</td>
+
 					<td class="select title font1">
 						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=eqcat&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">장비</span>
 					</td>
@@ -541,15 +551,15 @@ function checkList(){
 						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=otp_yn&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">OTP 인증</span>
 					</td>
 					<td class="select title font1">
-						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=device_accesslog_type_t0&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">장비 ACCESS</span>
+						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=device_accesslog_protocol_type_t0&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">장비 접속 이력</span>
 					</td>
 					<td class="select title font1">
-						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=device_accesslog_type_t1&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">웹뷰어 ACCESS</span>
+						<span style="cursor: pointer;" onclick="location.href='/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=device_accesslog_protocol_type_t1&direction=${direction == 'desc' ? 'asc' : 'desc' }&search_type=${search_type }&search_word=${search_word }'">웹뷰어 접속 이력</span>
 					</td>
 
 					</tr>
 					<tr height="0.1">
-						<td colspan="14">
+						<td colspan="15">
 							<hr size="0.1" color="CDCBCB" style="border-bottom: medium;">
 						</td>
 					</tr>
@@ -561,6 +571,32 @@ function checkList(){
 							<td class="select select_list_domain">
 								<span style="cursor: pointer; white-space: nowrap;" onclick="check_network('${ddns_list.domain }', '${ddns_list.jumin }')"><c:out value="${ddns_list.domain }" /></span>
 							</td>
+
+							<td>
+								<c:choose>
+									<c:when test="${login_member.member_auth == 2 }">
+									<a href="javascript:void(0)"  onclick="modify_access_rule('${login_member.member_id}', '${ddns_list.jumin}', '${ddns_list.access_rule}')">
+
+									<c:choose>
+										<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
+										<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
+										<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
+										<c:otherwise>${ddns_list.access_rule}</c:otherwise>
+									</c:choose>
+									</a>
+									</c:when>
+									<c:otherwise>
+									<c:choose>
+										<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
+										<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
+										<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
+										<c:otherwise>${ddns_list.access_rule}</c:otherwise>
+									
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+							</td>
+							
 							<td style="white-space: nowrap;">
 								<c:out value="${ddns_list.maker }" />
 							</td>
@@ -664,30 +700,17 @@ function checkList(){
 								</c:if>
 								<!-- END -->
 							</td>
-							<td font-size="93%">${ddns_list.jumin } 
-							 
-								<c:choose>
-								<c:when test="${login_member.member_auth == 2 }">
-								/ <a href="javascript:void(0)"  onclick="modify_access_rule('${login_member.member_id}', '${ddns_list.jumin}', '${ddns_list.access_rule}')">
+							
 
+							<td font-size="93%"> <a title= "${ddns_list.ip_address}"> ${ddns_list.jumin } </a> 
+							/ <a>
 								<c:choose>
-									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
-									<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
-									<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
-									<c:otherwise>${ddns_list.access_rule}</c:otherwise>
+									<c:when test="${ddns_list.insecure_pw ==0 }">안전</c:when>
+									<c:when test="${ddns_list.insecure_pw ==1 }">취약</c:when>
+									<c:otherwise>${ddns_list.insecure_pw}</c:otherwise>
 								</c:choose>
-								</a>
-								</c:when>
-								<c:otherwise>
-								<c:choose>
-									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
-									<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
-									<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
-									<c:otherwise>${ddns_list.access_rule}</c:otherwise>
+							</a>
 								
-								</c:choose>
-								</c:otherwise>
-							</c:choose>
 							<!-- 	
 							<c:choose>
 								<c:when test="${login_member.member_auth == 2 }">
@@ -695,8 +718,8 @@ function checkList(){
 
 								<c:choose>
 									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
-									<c:when test="${ddns_list.access_rule ==1 }">내부망+서버 white list IP만 허용</c:when>
-									<c:when test="${ddns_list.access_rule ==2}">내부망+서버 white list IP + 고객 개별설정한 IP</c:when>
+									<c:when test="${ddns_list.access_rule ==1 }">내부망, white list IP 허용</c:when>
+									<c:when test="${ddns_list.access_rule ==2}">내부망, white list IP, 고객 IP</c:when>
 									<c:otherwise>${ddns_list.web_policy}</c:otherwise>
 								</c:choose>
 								</a>
@@ -712,8 +735,42 @@ function checkList(){
 								</c:otherwise>
 							</c:choose>
 							 -->	
+							<!--
+							<c:choose>
+								<c:when test="${login_member.member_auth == 2 }">
+								<a href="javascript:void(0)"  onclick="modify_access_rule('${login_member.member_id}', '${ddns_list.jumin}', '${ddns_list.access_rule}')">
 
+								<c:choose>
+									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
+									<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
+									<c:otherwise>${ddns_list.access_rule}</c:otherwise>
+								</c:choose>
+								</a>
+								</c:when>
+								<c:otherwise>
+								<c:choose>
+									<c:when test="${ddns_list.access_rule ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.access_rule ==1 }">올레,통합앱</c:when>
+									<c:when test="${ddns_list.access_rule ==2}">통합앱</c:when>
+									<c:otherwise>${ddns_list.access_rule}</c:otherwise>
+								
+								</c:choose>
+								</c:otherwise>
+							</c:choose>
+							-->
 								</td>
+
+								
+							<td>
+								<c:choose>
+									<c:when test="${ddns_list.web_policy ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.web_policy ==1 }">내부망, white list IP 허용</c:when>
+									<c:when test="${ddns_list.web_policy ==2}">내부망, white list IP, 고객 IP</c:when>
+									<c:otherwise>${ddns_list.web_policy}</c:otherwise>
+								</c:choose>
+							</td>
+
 							<td>${ddns_list.eqcat }</td>
 							<td>${ddns_list.empty3 }</td>
 							<td>${ddns_list.privateip }</td>
@@ -837,10 +894,10 @@ function checkList(){
 						</c:choose> -->
 						
 							<c:choose>
-							 <c:when test="${not empty ddns_list.device_accesslog_type_t0 && ddns_list.device_accesslog_type_t0 != ''}">
+							 <c:when test="${not empty ddns_list.device_accesslog_protocol_type_t0 && ddns_list.device_accesslog_progocol_type_t0 != ''}">
 						 	<td title="${ddns_list.device_protocol_date_t0}">
 						 	<a target ="_blank" href="/PushAdmin/accesslog_page.do?type=accesslog&sort=req_id&direction=desc&page=1&access_log_type=2&mac_address=${ddns_list.jumin}">
-							 ${ddns_list.device_accesslog_type_t0 } </a> </td>
+							 ${ddns_list.device_accesslog_protocol_type_t0 } </a> </td>
 						  
 							 </c:when>
 							 <c:otherwise>
@@ -849,19 +906,62 @@ function checkList(){
 						</c:choose>
 						
 							<c:choose>
-							 <c:when test="${not empty ddns_list.device_accesslog_type_t1 && ddns_list.device_accesslog_type_t1 != ''}">
+							 <c:when test="${not empty ddns_list.device_accesslog_protocol_type_t1 && ddns_list.device_accesslog_protocol_type_t1 != ''}">
 						 	<td title="${ddns_list.device_protocol_date_t1}">
 						 	<a target ="_blank" href="/PushAdmin/accesslog_page.do?type=accesslog&sort=req_id&direction=desc&page=1&access_log_type=3&mac_address=${ddns_list.jumin}">
-							 ${ddns_list.device_accesslog_type_t1 } </a> </td>
+							 ${ddns_list.device_accesslog_protocol_type_t1 } </a> </td>
 						  
 							 </c:when>
 							 <c:otherwise>
 							 <td></td> 
 							 </c:otherwise>
 						</c:choose>
+					<!--
+						<tr align="center" height="30">
+							<td>
+								<!-- 20220121 장비 삭제/서비스 상태 변경 기능 계정 권한 확인 추가 -->
+								
+								
+							</td>
+							<td font-size="93%"> 
+							 <!-- 
+							 <c:choose>
+								<c:when test="${login_member.member_auth == 2 }">
+								<a href="javascript:void(0)"  onclick="modify_web_policy('${login_member.member_id}', '${ddns_list.jumin}', '${ddns_list.web_policy}')">
 
+								<c:choose>
+									<c:when test="${ddns_list.web_policy ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.web_policy ==1 }">내부망+서버 white list IP만 허용</c:when>
+									<c:when test="${ddns_list.web_policy ==2}">내부망+서버 white list IP + 고객 개별설정한 IP</c:when>
+									<c:otherwise>${ddns_list.web_policy}</c:otherwise>
+								</c:choose>
+								</a>
+								</c:when>
+								<c:otherwise>
+								<c:choose>
+									<c:when test="${ddns_list.web_policy ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.web_policy ==1 }">내부망+서버 white list IP만 허용</c:when>
+									<c:when test="${ddns_list.web_policy ==2}">내부망+서버 white list IP + 고객 개별설정한 IP</c:when>
+									<c:otherwise>${ddns_list.web_policy}</c:otherwise>
+								
+								</c:choose>
+								</c:otherwise>
+							</c:choose>
+						
+							  -->	
+									 
+							<!--
+								<c:choose>
+									<c:when test="${ddns_list.web_policy ==0 }">전체허용</c:when>
+									<c:when test="${ddns_list.web_policy ==1 }">내부망+서버 white list IP만 허용</c:when>
+									<c:when test="${ddns_list.web_policy ==2}">내부망+서버 white list IP + 고객 개별설정한 IP</c:when>
+									<c:otherwise>${ddns_list.web_policy}</c:otherwise>
+								</c:choose>
+								
+							-->
+						
 						<tr height="0.1">
-							<td colspan="14">
+							<td colspan="15">
 								<hr size="0.1" color="CDCBCB" style="border-bottom: medium;">
 							</td>
 						</tr>
@@ -870,7 +970,7 @@ function checkList(){
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="14" align="center">
+						<td colspan="15" align="center">
 							<c:if test="${start_page > 10 }">
 								<a href="/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=${sort }&direction=${direction }&page=${1 }&search_type=${search_type }&search_word=${search_word }">[맨앞]</a>
 								<a href="/PushAdmin/${url }?type=${type }&auth=${auth }&service_no=${service_no }&sort=${sort }&direction=${direction }&page=${start_page - 10 }&search_type=${search_type }&search_word=${search_word }">[이전]</a>
@@ -936,7 +1036,7 @@ function checkList(){
 								<td colspan="4"></td>
 							</c:when>
 							<c:otherwise>
-								<td colspan="4" align="right">
+								<td colspan="5" align="right">
 									<form id="excel_form" name="excel_form">
 										엑셀 다운로드&nbsp;&nbsp; <input id="excel_btn" type="button" style="background: #000000; color: white;" value="현재 페이지"> <input type="hidden" name="type" id="type" value="${type }"> <input type="hidden" name="sort" id="sort" value="${sort }"> <input type="hidden" name="page" id="page" value="${current_page }"> <input type="hidden" name="direction" id="direction" value="${direction }">
 										<c:if test="${type == 'ddns_search' || type == 'ddns_serviceno_search'|| type=='ddns_search_otp_yn' }">
@@ -983,7 +1083,7 @@ function checkList(){
 					</tr>
 					<tr height="30" align="right">
 
-						<td colspan="14">
+						<td colspan="15">
 
 							<form id="list_all_form" name="list_all_form" action="/PushAdmin/${url }">
 								<input id="list_all_btn" type="button" style="background: #000000; color: white;" value="전체 목록">
@@ -995,6 +1095,11 @@ function checkList(){
 						</td>
 					</tr>
 					<tr height="30" align="right">
+						<td colspan="1">
+							<c:if test="${login_member.member_auth == 2 }">
+								<input type="button" onclick="checkList()" value="로그아웃" style="background: #000000; color: white;">
+							</c:if>
+							</td>
 						<td colspan="14">
 							<!-- 20220121 장비 삭제/서비스 상태 변경 기능 계정 권한 확인 추가 START -->
 							<c:if test="${login_member.member_auth == 2 }">
@@ -1007,7 +1112,7 @@ function checkList(){
 						<td></td>
 					</tr>
 					<tr>
-						<td style="background-color: #F6F6F6; border: 0px; top: 5px;" height="30px" colspan="14" align="center" class="font2">P U S H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S E R V E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A D M I N I S T R A T O R</td>
+						<td style="background-color: #F6F6F6; border: 0px; top: 5px;" height="30px" colspan="15" align="center" class="font2">P U S H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S E R V E R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A D M I N I S T R A T O R</td>
 					</tr>
 				</table>
 			</td>

@@ -114,10 +114,11 @@ public class CExcelDocBuild   {
 	public void addRowList(  List<Map<String, Object>> __list ) {
 		try {
 			int cellIndex = 0;
-			 
+			logger.info("row??????");
 			for (Map<String, Object> _list : __list) {
 				SXSSFRow row = sheet.createRow(rowIndex++);
 				cellIndex = 0;
+				
 				for(Object value : _list.values())
 				{
 					SXSSFCell cell = row.createCell(cellIndex++);
@@ -141,6 +142,7 @@ public class CExcelDocBuild   {
 				}
 				//row = null;
 			}
+			logger.info("row!!!!!!!");
 		} catch (Exception e) {
 			logger.info("Excel Error {}" , e.getLocalizedMessage());
 			try {

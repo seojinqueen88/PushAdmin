@@ -12,21 +12,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		select row_number() over ( order by req_date ${direction} , req_date desc nulls last) as row_idx , *
 	 	from "CLIENT_ACCESSLOG_TBL" where mac_address = #{mac_address} ) as t1 where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
 		
-			
-		 	
 		<!-- 
 			select  *  from  (
 			select row_number() over ( order by ${sort} ${direction} nulls last  , req_date desc nulls last) as row_idx , *
 		 	from "CLIENT_ACCESSLOG_TBL" where mac_address = #{mac_address} ) as t1 where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
-		
 		 -->
-		<if test="search_type != null and !search_type.equals('')">
-		where ${search_type} like CONCAT('%',#{search_word},'%')
+		<if test="search_word != null and !search_word.equals('')">
+		and req_id  like CONCAT('%',#{search_word},'%') or  api_type like CONCAT('%',#{search_word},'%')
+		
 		</if>
 		<if test="offset !=null">
 			 offset #{offset}
 		</if>
 	</select>
+	
+	
+	 	<select id="count_ClientAccesLogTBL_all_1" parameterType="map" resultType="int">
+		select  count(*)  from  (
+		select row_number() over ( order by req_date ${direction} , req_date desc nulls last) as row_idx , *
+	 	from "CLIENT_ACCESSLOG_TBL" where mac_address = #{mac_address} ) as t1 
+		 <if test="page !=null and !page.equals('')">
+			where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
+		</if>
+		<if test="search_word != null and !search_word.equals('')">
+		and req_id  like CONCAT('%',#{search_word},'%') or  api_type like CONCAT('%',#{search_word},'%')
+		
+		</if>
+		<!-- 
+			select  *  from  (
+			select row_number() over ( order by ${sort} ${direction} nulls last  , req_date desc nulls last) as row_idx , *
+		 	from "CLIENT_ACCESSLOG_TBL" where mac_address = #{mac_address} ) as t1 where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
+		 -->
+		<!-- 
+		<if test="search_word != null and !search_word.equals('')">
+		and req_id  like CONCAT('%',#{search_word},'%') or  api_type like CONCAT('%',#{search_word},'%')
+		
+		</if>
+		 -->
+		
+		
+	</select>
+	
+	
 		
 	 	<select id="count_ClientAccesLogTBL_all" parameterType="map" resultType="int">
 		select count(*) from "CLIENT_ACCESSLOG_TBL" where api_type is not null
@@ -34,11 +61,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		 <if test="mac_address != null and !mac_address.equals('')">
 		and mac_address = #{mac_address}
 		</if>
-		<if test="search_type != null and !search_type.equals('')">
-		and ${search_type} like CONCAT('%',#{search_word},'%')
+		
+		<if test="search_word != null and !search_word.equals('')">
+		and (req_id  like CONCAT('%',#{search_word},'%') or  api_type like CONCAT('%',#{search_word},'%'))
 		</if>
 	</select>
 
+ 
  	<select id="count_ClientAccesLogTBL" parameterType="map" resultType="int">
 		select count(*) from "CLIENT_ACCESSLOG_TBL" where api_type is not null
 		<if test="client_access_log_req_type != null">
@@ -48,8 +77,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		 <if test="mac_address != null and !mac_address.equals('')">
 		and mac_address = #{mac_address}
 		</if>
-		<if test="search_type != null and !search_type.equals('')">
-		and ${search_type} like CONCAT('%',#{search_word},'%')
+		<if test="search_word != null and !search_word.equals('')">
+		and req_id  like CONCAT('%',#{search_word},'%') or  api_type like CONCAT('%',#{search_word},'%')
+		
 		</if>
 	</select>
 		  
@@ -104,7 +134,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 			
 			 
 		) as t1 where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
+		<if test="search_word != null and !search_word.equals('')">
+		and req_id  like CONCAT('%',#{search_word},'%') or  api_type like CONCAT('%',#{search_word},'%')
 		
+		</if>
+			
 	</select>
 	 	  
 	<select id="select_ClientAccesLogTBL_forExcel"
@@ -138,9 +172,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		
 		) as t1 
 			where row_idx between ((#{page} - 1) * 10) + 1 and (#{page} * 10)
-		<if test="search_type != null and !search_type.equals('')">
-		where ${search_type} like CONCAT('%',#{search_word},'%')
+
+		<if test="search_word != null and !search_word.equals('')">
+		and req_id  like CONCAT('%',#{search_word},'%') or  api_type like CONCAT('%',#{search_word},'%')
 		</if>
+
 	</select>
 	
 		 	  
